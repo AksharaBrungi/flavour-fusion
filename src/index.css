@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-primary: #f97316; /* orange-500 */
+  --color-accent: #10b981; /* emerald-500 */
+  --color-bg-dark: #0A0A0B;
+}
+
+@variant dark (.dark &);
+
+@layer base {
+  body {
+    background-color: #fafaf9; /* stone-50 */
+    color: #171717; /* stone-900 */
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .dark body, html.dark body {
+    background-color: #0A0A0B;
+    color: #e2e8f0; /* slate-200 */
+  }
+}
+
+@layer components {
+  .glass {
+    background-color: rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+  
+  .dark .glass {
+    background-color: rgb(255 255 255 / 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  }
+  
+  .bento-card {
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    /* Manually inclusive of glass styles since @apply glass failed */
+    background-color: rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark .bento-card {
+    background-color: rgb(255 255 255 / 0.05);
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+  }
+  
+  .dark .bento-card:hover {
+    border-color: rgb(255 255 255 / 0.2);
+    box-shadow: 0 0 20px 0 rgb(249 115 22 / 0.05);
+  }
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-stone-500 dark:text-slate-400;
+  }
+
+  .nav-link-active {
+    @apply bg-primary/10 text-primary border border-primary/20;
+  }
+  
+  .dark .nav-link-active {
+    @apply bg-white/5 text-primary border border-white/10;
+  }
+}
